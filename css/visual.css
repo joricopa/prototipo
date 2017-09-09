@@ -3,9 +3,14 @@
 	margin: 0 auto;
 	overflow: hidden;
 }
-
+#contenedor1{
+	width: 10%;
+	padding:10px;
+	box-sizing:border-box;
+	float: left;
+}
 #contenedor2 {
-	width: 50%;
+	width: 40%;
 	padding: 10px;
 	box-sizing:border-box;
 	float: left;
@@ -43,6 +48,177 @@
   pointer-events: none;
 }
 
-#svg{
-	position: absolute;
+#page-container{
+    position: absolute;
+    z-index: 2;
+    top: 61px; 
+    right: 0px; 
+    width: 50%; 
+    height: 919px; 
+    border: 1px solid black; 
+    background-color:#FFFFFF; 
+    overflow: scroll; 
+}
+
+#leyenda{
+    float: right;
+    position: absolute;
+    background: transparent url("http://localhost/Prototipo/img/leyenda.png") no-repeat scroll 0% 0%;
+    width: 327px;
+    height: 229px;
+    left: 670px;
+    top: 0px;
+}
+#fecha{
+    float: right;
+    position: absolute;
+    background: transparent url("http://localhost/Prototipo/img/fecha.png") no-repeat scroll 0% 0%;
+    width: 760px;
+    height: 60px;
+    left: 200px;
+    top: 920px;
+}
+#c1, #c2, #c3, #c4 {
+    position: fixed;
+    z-index: 2;
+    height: 59px;
+    border: 2px solid black; 
+    text-align: center;
+    cursor: pointer;
+}
+
+#c1{
+    top:420px;
+    left: 0px;
+    width: 200px;  
+    background-color: #D9D9D9
+}
+
+#c2{
+	top:480px;
+    left: 0px;
+    width: 200px;  
+    background-color: #D9D9D9
+}
+
+#c3{
+	top:540px;
+    left: 0px;
+    width: 200px;  
+    background-color: #D9D9D9
+}
+
+#c4{
+	top:600px;
+    left: 0px;
+    width: 200px;  
+    background-color: #D9D9D9
+}
+
+#ctime{
+    position: absolute;
+    left: 856px;
+    top: 20px;
+}
+#auxiliar{
+    position: fixed; 
+    z-index: 2;
+    top: 0px; 
+}
+
+.score-title{
+    font-size: 12px;
+    font-family: "adelle",sans-serif;
+    font-weight: bold;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+.score-value{
+    font-size: 20px;
+    font-family: "adelle",sans-serif;
+    font-weight: bold;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+#indicators{
+    position: fixed;
+    z-index: 4;
+    top: 0px; 
+    right: 0px;
+    width: 50%; 
+    height: 60px;
+    border: 1px solid black; 
+    //background-color: #FFFFFF; 
+}
+
+#i1, #i2, #i3, #i4 {
+    position: fixed;
+    z-index: 4;
+    top: 0px;
+    height: 60px; 
+    box-shadow: 0px 0px 0px 1px white inset;
+}
+
+#i1{
+    right: 37,5%;
+    width: 13%; 
+    background-color: #488397;
+     
+}
+
+#i2{
+    right: 25%;
+    width: 13%; 
+    background-color: #488397;
+}
+
+#i3{
+    right: 12.5%;
+    width: 13%; 
+    background-color: #488397;
+}
+
+#i4{
+    right: 0%;
+    width: 13%; 
+    background-color: #488397;
+}
+#a1, #a2, #a3, #a4 {
+    position: fixed;
+    z-index: 2;
+    top: 0px;
+    height: 59px;
+    border: 1px solid black; 
+    text-align: center;
+}
+
+#a1{
+    left: 0px;
+    width: 200px;  
+    background-color: #c8787a
+}
+
+#a2{
+    left: 200px;
+    width: 200px;  
+    background-color: #C6E746
+}
+
+#a3{
+    left: 400px;
+    width: 200px;  
+    background-color: #4d90fe
+}
+
+#a4{
+    left: 600px;
+    width: 200px;  
+    background-color: #10a54a
+}
+#ctime{
+    position: absolute;
+    left: 800px;
+    top: 20px;
 }

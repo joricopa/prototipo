@@ -1,107 +1,58 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
-<style>
+ 
+<html lang="es">
+ 
+<head>
+  <title>Visual</title>
+  <meta charset="utf-8" name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/visual.css" />
+  <script type="text/javascript" src="js/d3.v3.min.js"></script>
+  <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
+ 
+</head>
+ 
+<body>
+  <div class="contenedor">
+    <div id="auxiliar">
+        <div id="a1"><a  class="score-title">Fauna y flora</a><br/><a id="a1-fauna" class="score-value">0</a></div>
+        <div id="a2"><a  class="score-title">Superficie afectada</a><br/><a id="a2-superficie" class="score-value">0</a></div>
+        <div id="a3"><a  class="score-title">Maniobras de mitigación</a><br/><a id="a3-maniobras" class="score-value">0</a></div>
+        <div id="a4"><a  class="score-title">Responsabilides y consecuencias</a><br/><a id="a4-responsabilidades" class="score-value">0</a></div>
+        <div id="ctime">
+            <div id="runner1"></div> <div id="runner2"></div>
+        </div>
+      </div>
+  	<div id="contenedor1">
+  	<div id="option">
+    <input id= "c1" name="updateButton" type="button" value="Flora" onclick="generaVista(flora)"/>
+    <input id= "c2" name="updateButton" type="button" value="Superficie" onclick="generaVista(superficie)"/>
+    <input id="c3" name="updateButton" type="button" value="Maniobras" onclick="generaVista(maniobras)"/>
+    <input id="c4" name="updateButton" type="button" value="Responsabilidades" onclick="generaVista(responsabilidades)"/>
+    </div>
+    </div>
+    <div id="contenedor2">
+    
+    </div>
+    <div id="contenedor3">
+      <div id="indicators">
+          <div id="i1">
+              <p class="score-title"><a>Ranking</a> <br/><a id="i1-ranking" class="score-value"></a></p>  
+          </div>
+          <div id="i2">
+              <p class="score-title"><a>Fecha</a> <br/><a id="i2-date" class="score-value"></a></p>
+          </div>
+          <div id="i3">
+              <p class="score-title"><a>Legibilidad</a> <br/><a id="i3-rscore" class="score-value"></a></p>
+          </div>
+          <div id="i4">
+              <p class="score-title"><a>Reputación</a><br/><a id="i4-reputation" class="score-value"></a></p>
+          </div>
+      </div>
+      <iframe id="page-container" src="" sandbox></iframe>
+    </div>  
+  </div>
+  <script type="text/javascript" src="js/index.js"></script>
 
-.node {
-  cursor: pointer;
-}
+</body>
 
-.node:hover {
-  stroke: #000;
-  stroke-width: 1.5px;
-}
-
-.node--leaf {
-  fill: white;
-}
-
-.label {
-  font: 11px "Helvetica Neue", Helvetica, Arial, sans-serif;
-  text-anchor: middle;
-  text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;
-}
-
-.label,
-.node--root,
-.node--leaf {
-  pointer-events: none;
-}
-
-</style>
-<svg width="960" height="960"></svg>
-<script src="https://d3js.org/d3.v4.min.js"></script>
-<script>
-
-var svg = d3.select("svg"),
-    margin = 20,
-    diameter = +svg.attr("width"),
-    g = svg.append("g").attr("transform", "translate(" + diameter / 2 + "," + diameter / 2 + ")");
-
-var color = d3.scaleLinear()
-    .domain([-1, 5])
-    .range(["hsl(152,80%,80%)", "hsl(228,30%,40%)"])
-    .interpolate(d3.interpolateHcl);
-
-var pack = d3.pack()
-    .size([diameter - margin, diameter - margin])
-    .padding(2);
-
-d3.json("json/G1.json", function(error, root) {
-  if (error) throw error;
-
-  root = d3.hierarchy(root)
-      .sum(function(d) { return d.size; })
-      .sort(function(a, b) { return b.value - a.value; });
-
-  var focus = root,
-      nodes = pack(root).descendants(),
-      view;
-
-  var circle = g.selectAll("circle")
-    .data(nodes)
-    .enter().append("circle")
-      .attr("class", function(d) { return d.parent ? d.children ? "node" : "node node--leaf" : "node node--root"; })
-      .style("fill", function(d) { return d.children ? color(d.depth) : null; })
-      .on("click", function(d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); });
-
-  var text = g.selectAll("text")
-    .data(nodes)
-    .enter().append("text")
-      .attr("class", "label")
-      .style("fill-opacity", function(d) { return d.parent === root ? 1 : 0; })
-      .style("display", function(d) { return d.parent === root ? "inline" : "none"; })
-      .text(function(d) { return d.data.name; });
-
-  var node = g.selectAll("circle,text");
-
-  svg
-      .style("background", color(-1))
-      .on("click", function() { zoom(root); });
-
-  zoomTo([root.x, root.y, root.r * 2 + margin]);
-
-  function zoom(d) {
-    var focus0 = focus; focus = d;
-
-    var transition = d3.transition()
-        .duration(d3.event.altKey ? 7500 : 750)
-        .tween("zoom", function(d) {
-          var i = d3.interpolateZoom(view, [focus.x, focus.y, focus.r * 2 + margin]);
-          return function(t) { zoomTo(i(t)); };
-        });
-
-    transition.selectAll("text")
-      .filter(function(d) { return d.parent === focus || this.style.display === "inline"; })
-        .style("fill-opacity", function(d) { return d.parent === focus ? 1 : 0; })
-        .on("start", function(d) { if (d.parent === focus) this.style.display = "inline"; })
-        .on("end", function(d) { if (d.parent !== focus) this.style.display = "none"; });
-  }
-
-  function zoomTo(v) {
-    var k = diameter / v[2]; view = v;
-    node.attr("transform", function(d) { return "translate(" + (d.x - v[0]) * k + "," + (d.y - v[1]) * k + ")"; });
-    circle.attr("r", function(d) { return d.r * k; });
-  }
-});
-
-</script>
+</html>
