@@ -1,6 +1,5 @@
 //Variables Globales
-var diametro = 720, //diametro del circulo
-	numeroDatos=0,
+var diametro = 720, //diámetro del círculo
 	dataSource = 0,
     rankingorder = false,
     dateOrder = false,
@@ -11,12 +10,12 @@ var diametro = 720, //diametro del circulo
 	superficie=[],
 	maniobras=[],
 	responsabilidades=[];
-	
+//dejo un espacio para que queden los botones un poco mas abajo	
 var espacio=d3.select("#contenedor2").append("svg")
 	.attr("width",diametro)
 	.attr("height",100);
 //Creación de botones
-var datosBoton=["Legibilidad","Reputación","Ranking"];
+var datosBoton=["Ranking", "Fecha", "Legibilidad", "Reputación"];
 var botonDiv=d3.select("#contenedor2").append("svg")
 	.attr("width",diametro)
 	.attr("height",40);
@@ -27,51 +26,39 @@ var botones=botonDiv.selectAll(".updateButton")
 	.attr("class","updateButton")
 	.on("click", function(d,i){
 		dataSource=i;
-		actualizaVista();
+		console.log(dataSource)
+		d3.selectAll("circle").remove();
+		cambiarBoton();
+		labelDivText.style("fill", function (d) {
+			        return sortingColor(d);});
+		labelDivText.text(function (d) {
+			        return sortingLabel(d);});
 	});
-botones.append("rect")
+var rectB=botones.append("rect")
 	.attr("x", function(d, i) { return (i * 100) + 100; })
     .attr("width", 98)
     .attr("height", 25)
     .attr("ry", 5)
-    .style("stroke", "#787878")
-    .style("fill", "tan");
-botones.append("text")
+    .style("stroke", "#557985")
+    .style("stroke-width", "2px")
+    .style("cursor","pointer")
+    .style("fill", function (d, i) {
+            return dataSource == i ? "#488397" : "white";
+        });
+var rectT=botones.append("text")
     .attr("x", function(d, i) { return (i * 100) + (100 / 2) + 98; }) 
     .attr("y", 12)
     .attr("dy", "0.35em")
     .style("text-anchor", "middle")
+    .style("font-family", "sans-serif")
     .style("font-size", "15px")
+    .style("font-weight", "bold")
+    .style("cursor","pointer")
+    .style("fill", function (d, i) {
+                return dataSource == i ? "white" : "black";
+            })
     .text(function(d) { return d; });
-// botones para cambiar vista de datos    
-/*
-var datosBoton2=["Flora","Superficie","Maniobras","Responsabilidades"];
-var botonDiv2=d3.select("#contenedor2").append("svg")
-	.attr("width",diametro)
-	.attr("height",40);
-var botones2=botonDiv2.selectAll(".updateButton")
-	.data(datosBoton2)
-	.enter()
-	.append("g")
-	.attr("class","updateButton")
-	.on("click",function(d,i){
-		generaVista(datosBoton2[i]);
-	} );
-botones2.append("rect")
-	.attr("x", function(d, i) { return (i * 150); })
-    .attr("width", 150)
-    .attr("height", 35)
-    .attr("ry", 5)
-    .style("stroke", "#787878")
-    .style("fill", "tan");
-botones2.append("text")
-    .attr("x", function(d, i) { return (i * 150) + (150 / 2); }) 
-    .attr("y", 22)
-    .attr("dy", "0.35em")
-    .style("text-anchor", "middle")
-    .style("font-size", "15px")
-    .text(function(d) { return d; });
-*/
+//creacion de label para indicar el tipo de ordenamiento
 var labelDiv = d3.select("#contenedor2").append("svg")
         .attr("width", diametro)
         .attr("height", 40)
@@ -93,7 +80,7 @@ var labelDivText = labelDiv.append("text")
         .text(function (d) {
             return sortingLabel(d);
         });
-
+//Función con los Valores para el tipo de ordenamiento
 function sortingLabel(d){
     var result;
     if (dataSource==0){
@@ -130,7 +117,7 @@ function sortingLabel(d){
     }
     return result;
 }
-
+//Función que varía el color del texto del label que indica el tipo de ordenamiento
 function sortingColor(d){
     var result;
     if (dataSource==0){
@@ -167,7 +154,7 @@ function sortingColor(d){
     }
     return result;
 }
-
+//variables de rangos de colores utilizados en el fill y stroke de los circulos
 var color = d3.scale.ordinal()
         .range(["#0A0B3D", "#090D3F", "#091042", "#091345", "#091648", "#09184B", "#091B4E", "#081E51", "#082154", "#082357", "#08265A", "#08295D", "#082C60", "#082F63", "#073166", "#073469", "#07376C", "#073A6F", "#073C72", "#073F75", "#064278", "#06457B", "#06477E", "#064A81", "#064D84", "#065087", "#06538A", "#05558D", "#055890", "#055B93", "#055E96", "#056099", "#05639C", "#04669F", "#0469A2", "#046BA5", "#046EA8", "#0471AB", "#0474AE", "#0477B1", "#0379B4", "#037CB7", "#037FBA", "#0382BD", "#0384C0", "#0387C3", "#028AC6", "#028DC9", "#028FCC", "#0292CF", "#0295D2", "#0298D5", "#019BD8", "#019DDB", "#01A0DE", "#01A3E1", "#01A6E4", "#01A8E7", "#01ABEA", "#00AEED", "#00B1F0", "#00B3F3", "#00B6F6", "#00B9F9", "#00BCFC", "#00BFFF"])
         .domain(d3.range(0, 66));
@@ -194,69 +181,6 @@ d3.json("json/G1.json", function(data){
 	superficie=data.children[1];
 	maniobras=data.children[2];
 	responsabilidades=data.children[3];
-	//console.log(flora)
-
-	//función que genera la vista
-	function generaVista(datos){
-		console.log("hola")
-		var hijos = datos.children;
-		var nestedHijos=d3.nest()
-			.key(function(d){return d.name})
-			.entries(hijos);
-		console.log(nestedHijos)
-		var packableHijos={name:datos.name,values:nestedHijos};
-		var packChart = d3.layout.pack();
-		packChart.size([diametro,diametro])
-			.children(function(d){
-				return d.values;
-			})
-			.value(function(d){
-				return 1;
-			});
-		d3.select("#vista")
-			.selectAll("circle")
-			.data(packChart(packableHijos))
-			.enter()
-			.append("circle")
-			.attr("r", function(d){return d.r;})
-			.attr("cx",function(d){return d.x;})
-			.attr("cy",function(d){return d.y;})
-			.style("fill", function(d){return !d.children ? color(parseInt(d.colour)) : "white"})
-			.style("stroke", "green")
-			.style("stroke","1px")
-			.on("click", function(d){
-				return (mostrarPagina(d))
-			});
-	}
-	//generaVista(superficie);
-	//función que actualiza los datos de la vista
-	function actualizaVista(){
-		if (auxiliar==0) {
-			generaVista(flora);
-		};
-		if (auxiliar==1) {
-			generaVista(superficie);
-		};
-		if (auxiliar==2) {
-			generaVista(maniobras);
-		};
-		if (auxiliar==3) {
-			generaVista(responsabilidades);
-		};
-	}
-	//funcion para mostrar pagina
-	function mostrarPagina(d){
-		console.log("click");
-		if(!d.children){
-			console.log("Mostrando pagina")
-			document.getElementById('page-container').src = d.url_local;
-	        //document.getElementById("i1-ranking").innerHTML = rankingFix(d);
-	        //document.getElementById("i2-date").innerHTML = d.date;
-	        //document.getElementById("i3-rscore").innerHTML = scoreDiscretization(d);
-	        //document.getElementById("i4-reputation").innerHTML = d.reputation;
-		}
-	}
-
 	}
 );
 //Función que genera la vista 
@@ -267,7 +191,7 @@ function generaVista(datos){
 			superficie=data.children[1];
 			maniobras=data.children[2];
 			responsabilidades=data.children[3];
-			console.log("hola")
+			console.log("hola2")
 			var hijos = datos.children;
 			var nestedHijos=d3.nest()
 				.key(function(d){return d.name})
@@ -279,9 +203,44 @@ function generaVista(datos){
 				.children(function(d){
 					return d.values;
 				})
-				.value(function(d){
-					return d.size;
-				});
+			//	.value(function(d){
+			//		return d.size;
+			//	});
+			if (dataSource == 0) {
+			    rankingorder = !rankingorder;   
+			    packChart.value(function (d) {
+			        return rankingorder ? d.size : 100 * d.size / (101 * d.size - 100);
+			    });
+			}
+			if (dataSource == 1) {
+			    dateOrder = !dateOrder;
+			    packChart.value(function (d) {
+			        return dateOrder ? 66/(66-d.colour) : 66 /(d.colour+1);
+			    });
+			}
+			if (dataSource == 2) {
+			    scoreOrder = !scoreOrder;
+			    packChart.value(function (d) {
+			        return scoreOrder ?  100/(100 - d.rscore + 1) : 100/(d.rscore + 1) ;
+			    });
+			}
+			if (dataSource == 3) {
+			    reputationOrder = !reputationOrder;
+			    packChart.value(function (d) {
+			        return reputationOrder ? d.reputation + 1: 400/(1+d.reputation);
+			    });
+			}
+			labelDivText.style("fill", function (d) {
+			        return sortingColor(d);
+			    }
+			);
+
+
+			labelDivText.text(function (d) {
+			        return sortingLabel(d);
+			    }
+			);
+
 			d3.select("#vista")
 				.selectAll("circle")
 				.data(packChart(packableHijos))
@@ -306,7 +265,7 @@ function generaVista(datos){
 		);
 	}
 
-//funcion para mostrar pagina
+//Función para mostrar la página
 function mostrarPagina(d){
 	console.log("click");
 	if(!d.children){
@@ -318,9 +277,6 @@ function mostrarPagina(d){
         document.getElementById("i4-reputation").innerHTML = d.reputation;
 	}
 }
-
-//funcion para calcular el radio en base a
-
 //Función que calcula el color del borde del circulo
 function colorStroke(d){
     var c;
@@ -347,29 +303,85 @@ function colorStroke(d){
     }
     return colorRscore(c);
 }
-
-actualizaVista();
-
-function actualizaVista() {
-
-    if (dataSource == 0)
-        pack.value(function(d) { return d.size; });
-    if (dataSource == 1)
-        pack.value(function(d) { return 100; });
-    if (dataSource == 2)
-        pack.value(function(d) { return 1 +
-                 Math.floor(Math.random()*301); });
-
-    var data1 = pack.nodes(data);
-
-    titles.attr("x", function(d) { return d.x; })
-        .attr("y", function(d) { return d.y; })
-        .text(function(d) { return d.name +
-            (d.children ? "" : ": " + format(d.value)); });
-
-    circles.transition()
-        .duration(5000)
-        .attr("cx", function(d) { return d.x; })
-        .attr("cy", function(d) { return d.y; })
-        .attr("r", function(d) { return d.r; });
-};
+//Función que arregla el renaking de la página    
+function rankingFix(d){
+    var rank = parseInt(d.ranking) + 1;
+    return rank;
+}
+//Función para mostrar la legibilidad de la página
+function scoreDiscretization(d){
+    if (d.rscore >= 90){
+        return "Muy fácil";
+    }
+    if (d.rscore < 90 && d.rscore >= 80){
+        return "Fácil";
+    }
+    if (d.rscore < 80 && d.rscore >= 70){
+        return "Bastante fácil";
+    }
+    if (d.rscore < 70 && d.rscore >= 60){
+        return "Normal";
+    }
+    if (d.rscore < 60 && d.rscore >= 50){
+        return "Bastante difícil";
+    }
+    if (d.rscore < 50 && d.rscore >= 30){
+        return "Difícil";
+    }
+    if (d.rscore < 30 && d.rscore >= 0){
+        return "Muy difícil";
+    }
+}
+//Función para cambiar el color del botón de filtro que está activo
+function cambiarBoton(){
+    rectB
+        .attr("x", function (d, i) {
+            return (i * 100) + 100;
+        })
+        .attr("width", 98)
+        .attr("height", 25)
+        .attr("ry", 3)
+        .style("stroke", "#557985")
+        .style("stroke-width", "2px")
+        .style("fill", function (d, i) {
+            return dataSource == i ? "#488397" : "white";
+        }
+        );
+    rectT
+            .attr("x", function (d, i) {
+                return (i * 100) + (100 / 2) + 98;
+            })
+            .attr("y", 12)
+            .attr("dy", "0.35em")
+            .style("text-anchor", "middle")
+            .style("font-size", "15px")
+            .style("font-family", "sans-serif")
+            .style("font-weight", "bold")
+            .style("fill", function (d, i) {
+                return dataSource == i ? "white" : "black";
+         });
+}
+//Función para poder cambiar el color de los botones y generar la vista
+function union(datos){
+	generaVista(datos);
+	if (datos==flora) {document.getElementById("c1").style.background="green";
+						document.getElementById("c2").style.background="#D9D9D9";
+						document.getElementById("c3").style.background="#D9D9D9";
+						document.getElementById("c4").style.background="#D9D9D9";
+	};
+	if (datos==superficie) {document.getElementById("c1").style.background="#D9D9D9";
+							document.getElementById("c2").style.background="green";
+							document.getElementById("c3").style.background="#D9D9D9";
+							document.getElementById("c4").style.background="#D9D9D9";
+	};
+	if (datos==maniobras) {document.getElementById("c1").style.background="#D9D9D9";
+							document.getElementById("c2").style.background="#D9D9D9";
+							document.getElementById("c3").style.background="green";
+							document.getElementById("c4").style.background="#D9D9D9";
+	};
+	if (datos==responsabilidades) {document.getElementById("c1").style.background="#D9D9D9";
+									document.getElementById("c2").style.background="#D9D9D9";
+									document.getElementById("c3").style.background="#D9D9D9";
+									document.getElementById("c4").style.background="green";
+	};
+}
