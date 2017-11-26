@@ -1,0 +1,8 @@
+1a. Especies marinas que resultaron más afectadas producto del derrame.
+1b. Aves que resultaron más afectadas producto del derrame.
+2a. Estimación de cantidad total de petróleo derramado.
+2b. Extensión del derrame en km.
+3a. Maniobras de mitigación de daño a corto plazo.
+3b. Maniobras de mitigación de daño a largo plazo.
+4a. Indeminización de BP a los afectados.
+4b. Aporte de BP a los costos de limpieza.

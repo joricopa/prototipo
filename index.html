@@ -1,58 +1,105 @@
 <!DOCTYPE html>
- 
-<html lang="es">
- 
-<head>
-  <title>Visual</title>
-  <meta charset="utf-8" name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <link rel="stylesheet" href="css/visual.css" />
-  <script type="text/javascript" src="js/d3.v3.min.js"></script>
-  <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
- 
-</head>
- 
-<body>
-  <div class="contenedor">
-    <div id="auxiliar">
-        <div id="a1"><a  class="score-title">Fauna y flora</a><br/><a id="a1-fauna" class="score-value">0</a></div>
-        <div id="a2"><a  class="score-title">Superficie afectada</a><br/><a id="a2-superficie" class="score-value">0</a></div>
-        <div id="a3"><a  class="score-title">Maniobras de mitigación</a><br/><a id="a3-maniobras" class="score-value">0</a></div>
-        <div id="a4"><a  class="score-title">Responsabilides y consecuencias</a><br/><a id="a4-responsabilidades" class="score-value">0</a></div>
-        <div id="ctime">
-            <div id="runner1"></div> <div id="runner2"></div>
-        </div>
-      </div>
-  	<div id="contenedor1">
-  	<div id="option">
-    <input id= "c1" class="boton" name="updateButton" type="button" value="Flora" onclick="union(flora)"/>
-    <input id= "c2" class="boton" name="updateButton" type="button" value="Superficie" onclick="union(superficie)"/>
-    <input id="c3" class="boton" name="updateButton" type="button" value="Maniobras" onclick="union(maniobras)"/>
-    <input id="c4" class="boton" name="updateButton" type="button" value="Responsabilidades" onclick="union(responsabilidades)"/>
-    </div>
-    </div>
-    <div id="contenedor2">
+<html >
+  <head>
+    <meta charset="UTF-8">
+
+
+    <title>Log-in</title>
     
-    </div>
-    <div id="contenedor3">
-      <div id="indicators">
-          <div id="i1">
-              <p class="score-title"><a>Ranking</a> <br/><a id="i1-ranking" class="score-value"></a></p>  
-          </div>
-          <div id="i2">
-              <p class="score-title"><a>Fecha</a> <br/><a id="i2-date" class="score-value"></a></p>
-          </div>
-          <div id="i3">
-              <p class="score-title"><a>Legibilidad</a> <br/><a id="i3-rscore" class="score-value"></a></p>
-          </div>
-          <div id="i4">
-              <p class="score-title"><a>Reputación</a><br/><a id="i4-reputation" class="score-value"></a></p>
-          </div>
-      </div>
-      <iframe id="page-container" src="" sandbox></iframe>
-    </div>  
-  </div>
-  <script type="text/javascript" src="js/index.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <script type="text/javascript" src="js/jquery-1.9.1.min.js" ></script>
+    <script type="text/javascript" src="js/timestamp.js" ></script>
 
-</body>
 
+  </head>
+
+  <script type="text/javascript">
+    function logIn(){
+      var userTextField = $('#userNameField');
+      
+      var username = userTextField.val();
+
+      var studySelectBox = $('#studyCheckbox').get(0);
+      var panasCheckBox = $('#panasCheckBox').get(0);
+
+      var study = studySelectBox.options[studySelectBox.selectedIndex].value;
+      var panas = panasCheckBox.checked ? 1 : 0;
+      var timestamp = timeStamp();
+      console.log("Hola");
+
+      $.post("http://localhost/ProyectoTesisBD/index.php/users/login",
+      {
+        user: username,
+        study: study,
+        localtime: timestamp
+      },
+
+      function (data, status){
+        console.log(data);
+        if (status == "success"){
+          if (data["message"] == "ok"){
+            goToStudy(study, data["userId"], data["id_session"], panas);
+          }
+          else if (data["message"] == "login_error"){
+            alert("Bad Login");
+          }
+        }
+        else{
+          console.log("error");
+        }
+      });
+    }
+
+    function goToStudy(studyMode, userId, sessionId, panas){
+      if (studyMode == 1){
+        window.location.href = "http://localhost/ProyectoTesis/test.html?study="+studyMode+"&userId="+userId+"&session="+sessionId+"&panas="+panas;
+      }
+      else if (studyMode == 0){
+        window.location.href = "http://localhost/ProyectoTesis/traditional.html?study="+studyMode+"&userId="+userId+"&session="+sessionId+"&panas="+panas;
+      }
+    }
+
+    function test(){
+      var arreglo = [];
+      arreglo.push({id_image:1, action:0, x_data:1});
+      arreglo.push({id_image:2, action:1, x_data:2});
+
+      console.log("Doing POST call");
+      $.post("http://localhost/bgie/index.php/users/selectionLogEntry",
+      {
+        entry: arreglo,
+        session: "1"
+      },
+
+      function (data, status){
+        if (status == "success"){
+          console.log(data);
+        }
+        else{
+          console.log("error");
+        }
+      });
+    }
+  </script>
+
+  <body>
+
+    <div class="login-card">
+    <h1>Log-in</h1><br>
+    <input type="text" name="user" id="userNameField" placeholder="Username">
+    <select name="studyType" id="studyCheckbox">
+      <option value="0">Lineal</option>
+      <option value="1">Visual</option>
+    </select>
+    <input type="checkbox" id="panasCheckBox">Primera vez?</input>
+    <br/>
+    <br/>
+    <input type="submit" name="login" class="login login-submit" value="login" onclick="logIn()">
+</div>
+
+<!-- <div id="error"><img src="https://dl.dropboxusercontent.com/u/23299152/Delete-icon.png" /> Your caps-lock is on.</div> --> 
+    
+    
+    
+  </body>
 </html>

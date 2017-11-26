@@ -1,0 +1,332 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 03-07-2015, 06:49:46 PM
+    Author     : Gary
+*/
+
+body
+{
+    padding: 0;
+    margin: 0;
+}
+#wrapper
+{
+    margin: auto;
+    width: 800px;
+}
+.contents
+{
+    width: 50%; /*height: 150px;*/
+    margin: 0;
+}
+.contents > p
+{
+    padding: 8px;
+}
+.table
+{
+    width: 100%;
+    border-right: solid 1px #5f9000;
+}
+.table th, .table td
+{
+    width: 16%;
+    height: 20px;
+    padding: 4px;
+    text-align: left;
+}
+.table th
+{
+    border-left: solid 1px #5f9000;
+}
+.table td
+{
+    border-left: solid 1px #5f9000;
+    border-bottom: solid 1px #5f9000;
+}
+.header
+{
+    background-color: #4f7305;
+    color: White;
+}
+#divs
+{
+    margin: 0;
+    height: 200px;
+    font: verdana;
+    font-size: 14px;
+    background-color: White;
+}
+#divs > div
+{
+    width: 98%;
+    padding: 8px;
+}
+#divs > div p
+{
+    width: 95%;
+    padding: 8px;
+}
+ul.tab
+{
+    list-style: none;
+    top: 0px;
+    margin: 0;
+    padding: 0;
+}
+ul.tab li
+{
+    display: inline;
+    padding: 10px;
+    color: White;
+    cursor: pointer;
+}
+
+ul.tabv
+{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    float: left;
+    top: 0px;
+    position: relative;
+}
+ul.tabv li
+{
+    /*display: inline;*/
+    top: 0px;
+    padding: 10px;
+    color: White;
+    cursor: pointer;
+}
+#container
+{
+    width: 100%;
+    border: solid 1px red;
+}
+
+/* this is the style of an uncheked "button" */
+.input-check{
+    display:inline-block;
+    height:15px;
+    width:23px;
+    color:white;          
+}
+
+.input-check.c1{
+    background:transparent url(http://localhost/ProyectoTesis/img/unchecked_1.png ) no-repeat           
+}
+
+.input-check.c2{
+    background:transparent url(http://localhost/ProyectoTesis/img/unchecked_2.png ) no-repeat           
+}
+
+.input-check.c3{
+    background:transparent url(http://localhost/ProyectoTesis/img/unchecked_3.png ) no-repeat           
+}
+
+.input-check.c4{
+    background:transparent url(http://localhost/ProyectoTesis/img/unchecked_4.png ) no-repeat           
+}
+
+
+/* This is the style for a checked "button" */
+.input-check.c1.checked{
+    color:black;
+    font-weight:bold;
+    background:transparent url(http://localhost/ProyectoTesis/img/checked_1.png) no-repeat  
+}
+.input-check.c2.checked{
+    color:black;
+    font-weight:bold;
+    background:transparent url(http://localhost/ProyectoTesis/img/checked_2.png) no-repeat  
+}
+.input-check.c3.checked{
+    color:black;
+    font-weight:bold;
+    background:transparent url(http://localhost/ProyectoTesis/img/checked_3.png) no-repeat  
+}
+.input-check.c4.checked{
+    color:black;
+    font-weight:bold;
+    background:transparent url(http://localhost/ProyectoTesis/img/checked_4.png) no-repeat  
+}
+/* Hide the checkbox */
+.input-check input{
+    display:none;
+}
+
+.gsc-wrapper{
+    border: solid 1px #888888; 
+    overflow: scroll; 
+    height: 760px; 
+    width: 880px;
+}
+
+.q-paginator{
+    width: 880px;
+}
+
+#dropdown{
+    position: relative;
+    top: -10px;
+    float: right;
+    position: relative;
+    right: 0px;
+}
+
+.runner{
+    position: relative;
+    top: -45px;
+    float: right;
+    width: 35px;
+}
+#indicators{
+    position: absolute;
+    z-index: 5;
+    top: 0px; 
+    right: 0px;
+    width: 50%; 
+    height: 60px;
+    border: 1px solid black; 
+    //background-color: #FFFFFF; 
+}
+#page-container{
+    position: absolute;
+    z-index: 4;
+    top: 109px; 
+    right: 0px; 
+    width: 50%; 
+    height: 0px; 
+    border: 1px solid black; 
+    background-color:#FFFFFF; 
+    overflow: scroll; 
+}
+#superdiv {
+
+    top: 0px;
+    left: 0px;
+    width: 50%;
+}
+.score-title{
+    font-size: 12px;
+    font-family: "adelle",sans-serif;
+    font-weight: bold;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+.score-value{
+    font-size: 20px;
+    font-family: "adelle",sans-serif;
+    font-weight: bold;
+    color: #FFFFFF;
+    text-align: center;
+}
+#i1, #i2, #i3, #i4 {
+    position: fixed;
+    z-index: 4;
+    top: 0px;
+    height: 60px; 
+    box-shadow: 0px 0px 0px 1px white inset;
+}
+
+#i1{
+    right: 37,5%;
+    width: 13%; 
+    background-color: #488397;
+     
+}
+
+#i2{
+    right: 25%;
+    width: 13%; 
+    background-color: #488397;
+}
+
+#i3{
+    right: 12.5%;
+    width: 13%; 
+    background-color: #488397;
+}
+
+#i4{
+    right: 0%;
+    width: 13%; 
+    background-color: #488397;
+}
+#auxiliar{
+    position: fixed; 
+    z-index: 2;
+    top: 0px; 
+}
+#c1, #c2, #c3, #c4 {
+    position: fixed;
+    z-index: 2;
+    top: 0px;
+    height: 59px;
+    border: 1px solid black; 
+    text-align: center;
+}
+
+#c1{
+    left: 0px;
+    width: 200px;  
+    background-color: #c8787a
+}
+
+#c2{
+    left: 200px;
+    width: 200px;  
+    background-color: #C6E746
+}
+
+#c3{
+    left: 400px;
+    width: 200px;  
+    background-color: #4d90fe
+}
+
+#c4{
+    left: 600px;
+    width: 200px;  
+    background-color: #10a54a
+}
+.score-title{
+    font-size: 12px;
+    font-family: "adelle",sans-serif;
+    font-weight: bold;
+    color: #FFFFFF;
+    text-align: center;
+}
+#auxiliar2{
+    position: absolute; 
+    z-index: 5;
+    top: 150px; 
+}
+#botonMostrarOcultar{
+    padding: 10px;
+    background: orange;
+    cursor: pointer;
+    margin-top: 57px;
+    margin-bottom: 10px;
+    box-shadow: 0px 0px 1px #000;
+    display: inline-block;
+}
+
+#botonMostrarOcultar:hover{
+    opacity: .8;
+}
+
+#reloj{
+    position: absolute;
+    top:20px;
+    left:820px;
+    font-size:20px;
+    color:dodgerblue;
+    text-align:center;
+}

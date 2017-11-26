@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+<head>
+    <title>Tradicional</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="js/jquery-modal-master/jquery.modal.css" />
+	<link rel="stylesheet" href="style.css" />
+    <script src="js/jquery-1.9.1.min.js" type="text/javascript"></script>
+	<script type="text/javascript" src="js/jquery-modal-master/jquery.modal.min.js"></script>
+    <script src="js/jquery-ui.js" type="text/javascript"></script>
+	
+    <script type="text/javascript" src="js/queryString.js"></script>
+    <script src="js/jquery.runner.js" type="text/javascript"></script>
+    <script src="js/smartpaginator.js" type="text/javascript"></script>
+    
+	<script type="text/javascript" src="js/timestamp.js" ></script>
+
+
+    <link rel="stylesheet" href="css/defaultes.css" type="text/css">
+    <link rel="stylesheet" href="css/default.css" type="text/css">
+    <link href="css/smartpaginator.css" rel="stylesheet" type="text/css" />
+    <link href="css/tradicional.css" rel="stylesheet" type="text/css" />
+</head>
+<body onload="cuentaAtras()">
+    <div id="superdiv">
+    <!--<form id="form1" runat="server" top="0px" >-->
+        <div id="auxiliar">
+                <div id="c1"><a  class="score-title">Fauna y flora</a><br/><a id="c1-fauna" class="score-value">0</a></div>
+                <div id="c2"><a  class="score-title">Superficie afectada</a><br/><a id="c2-superficie" class="score-value">0</a></div>
+                <div id="c3"><a  class="score-title">Maniobras de mitigación</a><br/><a id="c3-maniobras" class="score-value">0</a></div>
+                <div id="c4"><a  class="score-title">Responsabilides y consecuencias</a><br/><a id="c4-responsabilidades" class="score-value">0</a></div>
+                <div id="reloj"></div>
+                    <div id="runner1"></div> <div id="runner2"></div>
+                </div>
+            </div>
+        
+        <div id="auxiliar2" style="float: left; height: 67px" top= "300px">
+        <div style="height: 77px; width: 100%">
+            <ul class="tab" >
+                <!--input type="image" src="1.png" name="image"-->
+                <li style="background-color: #D9D9D9; border: solid 1px #888888;" id="1" onclick="bb()">Fauna y flora</li>
+                <li style="background-color: #D9D9D9; border: solid 1px #888888;" id="2" onclick="bb()">Superficie afectada</li>
+                <li style="background-color: #D9D9D9; border: solid 1px #888888;" id="3" onclick="bb()">Maniobras de mitigación</li>
+                <li style="background-color: #D9D9D9; border: solid 1px #888888;" id="4" onclick="bb()">Responsabilidades</li>
+            </ul>
+            <div id="runner1" class="runner"></div>
+            <div id="runner2" class="runner"></div>
+            <div id="dropdown">
+                <label for="sort">Ordenar por: </label>
+                <select name="sort" id="sort" onchange="bb()">
+                    <optgroup label="Ranking">
+                        <option value="0">Mayor ranking</option>
+                        <option value="1">Menor ranking</option>
+                    </optgroup>
+                    <optgroup label="Fecha">
+                        <option value="2">Más reciente</option>
+                        <option value="3">Más antiguo</option>
+                    </optgroup>
+                    <optgroup label="Legibilidad">
+                        <option value="4">Más facil de leer</option>
+                        <option value="5">Más difícil de leer</option>
+                    </optgroup>
+                    <optgroup label="Reputación">
+                        <option value="6">Mayor reputación</option>
+                        <option value="7">Menor reputación</option>
+                    </optgroup>
+                </select>   
+            </div>
+
+        </div>
+        <div id="query0" class="contents">
+            <div id="wrapper-0" class="gsc-wrapper">
+            </div>
+        </div>
+        <div id="query1" class="contents" >
+            <div id="wrapper-1" class="gsc-wrapper">
+            </div>
+            <div id="query1-paginator" class="q-paginator"></div>
+        </div>
+        <div id="query2" class="contents">
+            <div id="wrapper-2" class="gsc-wrapper" >
+            </div>
+            <div id="query2-paginator" class="q-paginator"></div>
+        </div>
+        <div id="query3" class="contents">
+            <div id="wrapper-3" class="gsc-wrapper" >
+            </div>
+            <div id="query3-paginator" class="q-paginator"></div>
+        </div>
+        <div id="query4" class="contents">
+            <div id="wrapper-4" class="gsc-wrapper" >
+            </div>
+            <div id="query4-paginator" class="q-paginator"></div>
+        </div>
+        <div id="query5" class="contents">
+            <div id="wrapper-5" class="gsc-wrapper" >
+            
+            </div>
+            <div id="query5-paginator" class="q-paginator"></div>
+        </div>
+        <div id="query6" class="contents">
+            <div id="wrapper-6" class="gsc-wrapper" >
+            </div>
+            <div id="query6-paginator" class="q-paginator"></div>
+        </div>
+        <div id="query7" class="contents">
+            <div id="wrapper-7" class="gsc-wrapper" >
+
+            </div>
+            <div id="query7-paginator" class="q-paginator"></div>
+        </div>
+        <div id="query8" class="contents">
+            <div id="wrapper-8" class="gsc-wrapper" >
+
+            </div>
+            <div id="query8-paginator" class="q-paginator"></div>
+        </div>
+        </div>
+    <!--</form>-->
+</div>
+<div>
+    <div id="indicators">
+        <div id="i1">
+            <p class="score-title"><a>Ranking</a> <br/><a id="i1-ranking" class="score-value"></a></p>  
+        </div>
+        <div id="i2">
+            <p class="score-title"><a>Fecha</a> <br/><a id="i2-date" class="score-value"></a></p>
+        </div>
+        <div id="i3">
+            <p class="score-title"><a>Legibilidad</a> <br/><a id="i3-rscore" class="score-value"></a></p>
+        </div>
+        <div id="i4">
+            <p class="score-title"><a>Reputación</a><br/><a id="i4-reputation" class="score-value"></a></p>
+        </div>
+        <input type="button" id="botonMostrarOcultar" value="Mostrar Página" onclick="divLogin()" />
+    </div>
+    
+    <iframe id="page-container" src="" sandbox="allow-scripts allow-popups allow-same-origin"></iframe>
+</div>
+<script src="js/tradicional.js" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>

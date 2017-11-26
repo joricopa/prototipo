@@ -6,47 +6,64 @@
   <title>Visual</title>
   <meta charset="utf-8" name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <link rel="stylesheet" href="css/visual.css" />
-  <script type="text/javascript" src="d3/d3.min.js"></script>
+  <script type="text/javascript" src="js/d3.v3.min.js"></script>
   <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
  
 </head>
  
-<body>
+<body onload="cuentaAtras()">
   <div class="contenedor">
-  	<div id="contenedor1">
-  		<div id="auxiliar">
-            <div id="c1"><a  class="score-title">Fauna y flora</a><br/><a id="c1-fauna" class="score-value">0</a></div>
-            <div id="c2"><a  class="score-title">Superficie afectada</a><br/><a id="c2-superficie" class="score-value">0</a></div>
-            <div id="c3"><a  class="score-title">Maniobras de mitigación</a><br/><a id="c3-maniobras" class="score-value">0</a></div>
-            <div id="c4"><a  class="score-title">Responsabilides y consecuencias</a><br/><a id="c4-responsabilidades" class="score-value">0</a></div>
-            <div id="ctime">
-                <div id="runner1"></div> <div id="runner2"></div>
-            </div>
+    <div id="auxiliar">
+        <div id="a1"><a  class="score-title">Fauna y flora</a><br/><a id="a1-fauna" class="score-value">0</a></div>
+        <div id="a2"><a  class="score-title">Superficie afectada</a><br/><a id="a2-superficie" class="score-value">0</a></div>
+        <div id="a3"><a  class="score-title">Maniobras de mitigación</a><br/><a id="a3-maniobras" class="score-value">0</a></div>
+        <div id="a4"><a  class="score-title">Responsabilides y consecuencias</a><br/><a id="a4-responsabilidades" class="score-value">0</a></div>
+        <div id="ctime">
+            <div id="runner1"></div> <div id="runner2"></div>
         </div>
-  	</div>
+    </div>
+  	<div id="contenedor1">
+  	<div id="option">
+    <input id= "c1" class="boton" name="updateButton" type="button" value="Flora" onclick="union(flora)"/>
+    <input id= "c2" class="boton" name="updateButton" type="button" value="Superficie" onclick="union(superficie)"/>
+    <input id="c3" class="boton" name="updateButton" type="button" value="Maniobras" onclick="union(maniobras)"/>
+    <input id="c4" class="boton" name="updateButton" type="button" value="Responsabilidades" onclick="union(responsabilidades)"/>
+    </div>
+    </div>
     <div id="contenedor2">
-    	<div id="leyenda"></div>
-    	<div id="fecha"></div>
+      <div id="leyenda_ranking"></div>
+      <div id="leyenda_fecha"></div>
+      <div id="leyenda_legibilidad"></div>
+      <div id="leyenda_reputacion"></div>
+      <div id="reloj"></div>
     </div>
     <div id="contenedor3">
-    	<div id="indicators">
-                <div id="i1">
-                    <p class="score-title"><a>Ranking</a> <br/><a id="i1-ranking" class="score-value"></a></p>  
-                </div>
-                <div id="i2">
-                    <p class="score-title"><a>Fecha</a> <br/><a id="i2-date" class="score-value"></a></p>
-                </div>
-                <div id="i3">
-                    <p class="score-title"><a>Legibilidad</a> <br/><a id="i3-rscore" class="score-value"></a></p>
-                </div>
-                <div id="i4">
-                    <p class="score-title"><a>Reputación</a><br/><a id="i4-reputation" class="score-value"></a></p>
-                </div>
-            </div>
+      <div id="indicators">
+          <div id="i1">
+              <p class="score-title"><a>Ranking</a> <br/><a id="i1-ranking" class="score-value"></a></p>  
+          </div>
+          <div id="i2">
+              <p class="score-title"><a>Fecha</a> <br/><a id="i2-date" class="score-value"></a></p>
+          </div>
+          <div id="i3">
+              <p class="score-title"><a>Legibilidad</a> <br/><a id="i3-rscore" class="score-value"></a></p>
+          </div>
+          <div id="i4">
+              <p class="score-title"><a>Reputación</a><br/><a id="i4-reputation" class="score-value"></a></p>
+          </div>
+      </div>
+      <input type="button" id="botonMostrarOcultar" value="Mostrar Página" onclick="divLogin()" />
+      <!--
+      <div id="checkboxCaja">
+            <input type="checkbox" name="Check1" id="Check1"onclick="guardarPagina()"><label for="Check1"></label>
+            <input type="checkbox" name="Check2" id="Check2"onclick="guardarPagina2()"><label for="Check2"></label>
+            <input type="checkbox" name="Check3" id="Check3"onclick="guardarPagina3()"><label for="Check3"></label>
+            <input type="checkbox" name="Check4" id="Check4"onclick="guardarPagina4()"><label for="Check4"></label>  
+      </div>
+      -->
+      <iframe id="page-container" src="" sandbox="allow-scripts allow-popups allow-same-origin"></iframe>
     </div>  
   </div>
   <script type="text/javascript" src="js/visual.js"></script>
-
 </body>
-
 </html>

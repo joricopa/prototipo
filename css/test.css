@@ -1,0 +1,289 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 05-05-2015, 06:39:17 AM
+    Author     : Gary
+*/
+/* body {
+    font: 300 36px"Helvetica Neue";
+    height: 640px;
+    margin: 80px 160px 80px 160px;
+    overflow: hidden;
+    position: relative;
+    width: 960px;
+} */
+a:link, a:visited {
+    color: #777;
+    text-decoration: none;
+}
+a:hover {
+    color: #666;
+}
+blockquote {
+    margin: 0;
+}
+blockquote:before {
+    content:"â€œ";
+    position: absolute;
+    left: -.4em;
+}
+blockquote:after {
+    content:"â€";
+    position: absolute;
+}
+body > ul {
+    margin: 0;
+    padding: 0;
+}
+h1 {
+    font-size: 64px;
+}
+h1, h2, h3 {
+    font-weight: inherit;
+    margin: 0;
+}
+/* h2, h3 {
+    text-align: right;
+    font-size: inherit;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+} */
+
+/* h2 {
+    font-size: 24px;
+    position: absolute;
+} */
+
+/* h3 {
+    bottom: -20px;
+    font-size: 18px;
+} */
+.invert {
+    background: #1f1f1f;
+    color: #dcdccc;
+}
+.invert h2, .invert h3 {
+    color: #7f9f7f;
+}
+.string, .regexp {
+    color: #f39;
+}
+.keyword {
+    color: #00c;
+}
+.comment {
+    color: #777;
+    font-style: oblique;
+}
+.number {
+    color: #369;
+}
+.class, .special {
+    color: #1181B8;
+}
+/* body > svg {
+    position: absolute;
+    top: -80px;
+    left: -160px;
+} */
+text {
+    font-size: 11px;
+    pointer-events: none;
+}
+text.parent {
+    fill: #1f77b4;
+}
+circle {
+    fill: #ccc;
+    stroke: #999;
+    pointer-events: all;
+}
+circle.parent {
+    fill: #1f77b4;
+    fill-opacity: .1;
+    stroke: steelblue;
+}
+circle.parent:hover {
+    stroke: #ff7f0e;
+    stroke-width: .5px;
+}
+
+div.tooltip {
+    position: absolute;
+    text-align: center;
+    width: 100px;
+    z-index: 5;
+    padding: 8px;
+    font: 10px sans-serif;
+    background: white;
+    border: solid 1px #aaa;
+    border-radius: 8px;
+    pointer-events: none;
+}
+
+#superdiv {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+#hope{
+    width: 60px;
+    height: 60px;
+    float: right;
+    display: inline-block;
+    top: 66px;
+    position: absolute;
+    background-image: url("img/close60.png");
+    right: -2px;
+}
+
+#indicators{
+    position: fixed;
+    z-index: 4;
+    top: 0px; 
+    right: 0px;
+    width: 50%; 
+    height: 60px;
+    border: 1px solid black; 
+    //background-color: #FFFFFF; 
+}
+
+#i1, #i2, #i3, #i4 {
+    position: fixed;
+    z-index: 4;
+    top: 0px;
+    height: 60px; 
+    box-shadow: 0px 0px 0px 1px white inset;
+}
+
+#i1{
+    right: 37,5%;
+    width: 13%; 
+    background-color: #488397;
+     
+}
+
+#i2{
+    right: 25%;
+    width: 13%; 
+    background-color: #488397;
+}
+
+#i3{
+    right: 12.5%;
+    width: 13%; 
+    background-color: #488397;
+}
+
+#i4{
+    right: 0%;
+    width: 13%; 
+    background-color: #488397;
+}
+
+#c1, #c2, #c3, #c4 {
+    position: fixed;
+    z-index: 2;
+    top: 0px;
+    height: 59px;
+    border: 1px solid black; 
+    text-align: center;
+}
+
+#c1{
+    left: 0px;
+    width: 200px;  
+    background-color: #c8787a
+}
+
+#c2{
+    left: 200px;
+    width: 200px;  
+    background-color: #C6E746
+}
+
+#c3{
+    left: 400px;
+    width: 200px;  
+    background-color: #4d90fe
+}
+
+#c4{
+    left: 600px;
+    width: 200px;  
+    background-color: #10a54a
+}
+
+#ctime{
+    position: absolute;
+    left: 856px;
+    top: 20px;
+}
+
+#page-container{
+    position: absolute;
+    z-index: 2;
+    top: 61px; 
+    right: 0px; 
+    width: 50%; 
+    height: 919px; 
+    border: 1px solid black; 
+    background-color:#FFFFFF; 
+    overflow: scroll; 
+}
+
+#svg-container{
+    position: absolute;
+    //indica el orden de un elemento y sus descendientes al superponerse
+    // un elemento con mayor z-ind cubre a otro menor 
+    z-index: 2;
+}
+
+#auxiliar{
+    position: fixed; 
+    z-index: 2;
+    top: 0px; 
+}
+
+.score-title{
+    font-size: 12px;
+    font-family: "adelle",sans-serif;
+    font-weight: bold;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+.score-value{
+    font-size: 20px;
+    font-family: "adelle",sans-serif;
+    font-weight: bold;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+.container-text{
+    font-size: 18px;
+    font-family: "adelle",sans-serif;
+    font-weight: bold;
+    color: #FFFFFF;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#leyenda{
+    float: right;
+    position: absolute;
+    background: transparent url("http://localhost/ProyectoTesis/img/leyenda.png") no-repeat scroll 0% 0%;
+    width: 327px;
+    height: 229px;
+    left: 570px;
+    top: 775px;
+}
+
+
+
