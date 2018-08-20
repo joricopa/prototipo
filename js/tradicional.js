@@ -3,16 +3,40 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+var contenidoTxt= new Array();
+var archivoTxt= new XMLHttpRequest();
+var fileRuta= 'datos.txt';
+archivoTxt.open("GET",fileRuta,false);
+archivoTxt.send(null);
+var txt= archivoTxt.responseText;
+console.log("texto");
+console.log(txt);
+console.log("texto");
+var idSesion=parseInt(txt);
+console.log("ESTE ");
+console.log(idSesion);
+console.log("ESTE ");
+//console.log("idSesion")
+//console.log(idSesion)
+//console.log("idSesion")
+var idPagina=0;
+var grupoActual=0; 
 var clic = 1;
+//guardaPaginator();
+
 function divLogin(){ 
    if(clic==1){
    document.getElementById("page-container").style.height = "0px";
    document.getElementById("botonMostrarOcultar").value="Mostrar Página";
    clic = clic + 1;
+   console.log(idSesion)
+   $.post("insertaraccion.php",{idSesion:idSesion,accion:'2',idAsociado:idPagina,queryGroup:grupoActual,tipoAccion:'tradicional'});
    } else{
        document.getElementById("page-container").style.height = "919px";
        document.getElementById("botonMostrarOcultar").value="Ocultar Página";      
     clic = 1;
+    console.log(idSesion)
+    $.post("insertaraccion.php",{idSesion:idSesion,accion:'1',idAsociado:idPagina,queryGroup:grupoActual,tipoAccion:'tradicional'});
    }   
 }
  var valorQuery;
@@ -46,25 +70,6 @@ if (queryString["panas"] == 1){
 else{
     conjunto = 'json/G2.json';
 }
-
-$(function () {
-    $('#runner1').runner({
-        countdown: true,
-        startAt: taskTime,
-        stopAt: 0,
-        milliseconds: false,
-        autostart: false
-        }).on('runnerFinish', function(eventObject, info) {
-            onNextStepClick();
-
-
-        });
-
-    });
-
-
-
-
 
 $(document).ready(function () {
     $.getJSON(conjunto, function (data) {
@@ -242,15 +247,21 @@ function bb()
     generateMiniResults(6, order, miniJson3);
     generateMiniResults(7, order, miniJson4);
 
-    $('#query1-paginator').smartpaginator({totalrecords: 100, recordsperpage: 10, datacontainer: 'results-1', dataelement: 'span', initval: 1, next: 'Next', prev: 'Prev', first: 'First', last: 'Last', theme: 'black'});
-    $('#query2-paginator').smartpaginator({totalrecords: 100, recordsperpage: 10, datacontainer: 'results-2', dataelement: 'span', initval: 0, next: 'Next', prev: 'Prev', first: 'First', last: 'Last', theme: 'black'});
-    $('#query3-paginator').smartpaginator({totalrecords: 100, recordsperpage: 10, datacontainer: 'results-3', dataelement: 'span', initval: 0, next: 'Next', prev: 'Prev', first: 'First', last: 'Last', theme: 'black'});
-    $('#query4-paginator').smartpaginator({totalrecords: 100, recordsperpage: 10, datacontainer: 'results-4', dataelement: 'span', initval: 0, next: 'Next', prev: 'Prev', first: 'First', last: 'Last', theme: 'black'});
-    $('#query5-paginator').smartpaginator({totalrecords: 100, recordsperpage: 10, datacontainer: 'results-5', dataelement: 'span', initval: 0, next: 'Next', prev: 'Prev', first: 'First', last: 'Last', theme: 'black'});
-    $('#query6-paginator').smartpaginator({totalrecords: 100, recordsperpage: 10, datacontainer: 'results-6', dataelement: 'span', initval: 0, next: 'Next', prev: 'Prev', first: 'First', last: 'Last', theme: 'black'});
-    $('#query7-paginator').smartpaginator({totalrecords: 100, recordsperpage: 10, datacontainer: 'results-7', dataelement: 'span', initval: 0, next: 'Next', prev: 'Prev', first: 'First', last: 'Last', theme: 'black'});
-    $('#query8-paginator').smartpaginator({totalrecords: 100, recordsperpage: 10, datacontainer: 'results-8', dataelement: 'span', initval: 0, next: 'Next', prev: 'Prev', first: 'First', last: 'Last', theme: 'black'});
+    $('#query1-paginator').smartpaginator({totalrecords: 100, recordsperpage: 10, datacontainer: 'results-1', dataelement: 'span', initval: 1, next: 'Next', prev: 'Prev', first: 'First', last: 'Last', theme: 'black', onchange: onChange});
+    $('#query2-paginator').smartpaginator({totalrecords: 100, recordsperpage: 10, datacontainer: 'results-2', dataelement: 'span', initval: 0, next: 'Next', prev: 'Prev', first: 'First', last: 'Last', theme: 'black', onchange: onChange});
+    $('#query3-paginator').smartpaginator({totalrecords: 100, recordsperpage: 10, datacontainer: 'results-3', dataelement: 'span', initval: 0, next: 'Next', prev: 'Prev', first: 'First', last: 'Last', theme: 'black', onchange: onChange});
+    $('#query4-paginator').smartpaginator({totalrecords: 100, recordsperpage: 10, datacontainer: 'results-4', dataelement: 'span', initval: 0, next: 'Next', prev: 'Prev', first: 'First', last: 'Last', theme: 'black', onchange: onChange});
+    $('#query5-paginator').smartpaginator({totalrecords: 100, recordsperpage: 10, datacontainer: 'results-5', dataelement: 'span', initval: 0, next: 'Next', prev: 'Prev', first: 'First', last: 'Last', theme: 'black', onchange: onChange});
+    $('#query6-paginator').smartpaginator({totalrecords: 100, recordsperpage: 10, datacontainer: 'results-6', dataelement: 'span', initval: 0, next: 'Next', prev: 'Prev', first: 'First', last: 'Last', theme: 'black', onchange: onChange});
+    $('#query7-paginator').smartpaginator({totalrecords: 100, recordsperpage: 10, datacontainer: 'results-7', dataelement: 'span', initval: 0, next: 'Next', prev: 'Prev', first: 'First', last: 'Last', theme: 'black', onchange: onChange});
+    $('#query8-paginator').smartpaginator({totalrecords: 100, recordsperpage: 10, datacontainer: 'results-8', dataelement: 'span', initval: 0, next: 'Next', prev: 'Prev', first: 'First', last: 'Last', theme: 'black', onchange: onChange});
 
+}
+
+function onChange(newPageValue) {
+    $.post("insertaraccion.php",{idSesion:idSesion,accion:'20',idAsociado:newPageValue,queryGroup:grupoActual,tipoAccion:'tradicional'});
+    //alert(newPageValue);
+    console.log("onchange function")
 }
 
 function deleteObject(obj,id){
@@ -290,6 +301,7 @@ function change_state(obj) {
             }
             child = text.children[parentId-1].children[localId];
             miniJson1.children.push(child);
+            $.post("insertaraccion.php",{idSesion:idSesion,accion:'15',idAsociado:obj.title,queryGroup:grupoActual,tipoAccion:'tradicional'});
             c1Fauna++; 
             document.getElementById("c1-fauna").innerHTML = c1Fauna ;
  
@@ -310,6 +322,7 @@ function change_state(obj) {
             child = text.children[parentId-1].children[localId];
             miniJson2.children.push(child);
             c2Superficie++; 
+            $.post("insertaraccion.php",{idSesion:idSesion,accion:'16',idAsociado:obj.title,queryGroup:grupoActual,tipoAccion:'tradicional'});
             document.getElementById("c2-superficie").innerHTML = c2Superficie;
 
             generateMiniResults(5, order, miniJson2);
@@ -328,6 +341,7 @@ function change_state(obj) {
             }
             child = text.children[parentId-1].children[localId];
             miniJson3.children.push(child);
+            $.post("insertaraccion.php",{idSesion:idSesion,accion:'17',idAsociado:obj.title,queryGroup:grupoActual,tipoAccion:'tradicional'});
             c3Maniobras++;
             document.getElementById("c3-maniobras").innerHTML = c3Maniobras;
             generateMiniResults(6, order, miniJson3);
@@ -347,6 +361,7 @@ function change_state(obj) {
             child = text.children[parentId-1].children[localId];
             miniJson4.children.push(child);
             c4Responsabilidades++;
+            $.post("insertaraccion.php",{idSesion:idSesion,accion:'18',idAsociado:obj.title,queryGroup:grupoActual,tipoAccion:'tradicional'});
             document.getElementById("c4-responsabilidades").innerHTML = c4Responsabilidades;
 
             generateMiniResults(7, order, miniJson4);
@@ -375,6 +390,7 @@ function change_state(obj) {
             
             deleteObject(miniJson1,obj.title);
             order = $("#sort").val();
+            $.post("insertaraccion.php",{idSesion:idSesion,accion:'21',idAsociado:obj.title,queryGroup:grupoActual,tipoAccion:'tradicional'});
             c1Fauna--; 
             document.getElementById("c1-fauna").innerHTML = c1Fauna;
             generateMiniResults(4, order, miniJson1);
@@ -388,7 +404,8 @@ function change_state(obj) {
             
             deleteObject(miniJson2,obj.title);
             order = $("#sort").val();
-            c2Superficie--; 
+            c2Superficie--;
+            $.post("insertaraccion.php",{idSesion:idSesion,accion:'22',idAsociado:obj.title,queryGroup:grupoActual,tipoAccion:'tradicional'}); 
             document.getElementById("c2-superficie").innerHTML = c2Superficie;
             generateMiniResults(5, order, miniJson2);
             console.log(arrayGroup2);
@@ -400,7 +417,7 @@ function change_state(obj) {
             
             deleteObject(miniJson3,obj.title);
             order = $("#sort").val();
-            
+            $.post("insertaraccion.php",{idSesion:idSesion,accion:'23',idAsociado:obj.title,queryGroup:grupoActual,tipoAccion:'tradicional'});
             c3Maniobras--;
             document.getElementById("c3-maniobras").innerHTML = c3Maniobras;
             generateMiniResults(6, order, miniJson3);
@@ -409,11 +426,15 @@ function change_state(obj) {
 		}
 		else if(obj.id == "c4" && arrayGroup4.indexOf(obj.title)!=-1 && (arrayGroup4.length == c4Responsabilidades)){
 			var index = arrayGroup4.indexOf(obj.title);
+            console.log("_____________________")
+            console.log(index)
+            console.log("_____________________")
 			arrayGroup4.splice(index, 1);
             
             deleteObject(miniJson4,obj.title);
             order = $("#sort").val();
             c4Responsabilidades--;
+            $.post("insertaraccion.php",{idSesion:idSesion,accion:'hola2',idAsociado:obj.title,queryGroup:grupoActual,tipoAccion:'tradicional'});
             document.getElementById("c4-responsabilidades").innerHTML = c4Responsabilidades;
             generateMiniResults(7, order, miniJson4);
             console.log(arrayGroup4);
@@ -1799,6 +1820,8 @@ function generateResults(query, order, text) {
 
         ObjATitle.addClass("gs-title");
         ObjATitle.attr("id",text.children[query].children[i].url_local);
+        ObjATitle.attr("page",text.children[query].children[i].id);
+        ObjATitle.attr("groupPage",text.children[query].id);
         ObjATitle.attr("ranking",rankingFix(text, i, query));
         ObjATitle.attr("fecha",text.children[query].children[i].date);
         ObjATitle.attr("legibilidad",text.children[query].children[i].rscore);
@@ -1845,8 +1868,12 @@ function generateResults(query, order, text) {
 function mostrarPagina(d){
     console.log("click");
     console.log("Mostrando pagina")
+    console.log(d.page)
     console.log(d.id)
     console.log($(d).attr("ranking"))
+    idPagina=$(d).attr("page");
+    grupoActual=$(d).attr("groupPage");
+    $.post("insertaraccion.php",{idSesion:idSesion,accion:'19',idAsociado:$(d).attr("page"),queryGroup:$(d).attr("groupPage"),tipoAccion:'tradicional'});
     document.getElementById('page-container').src = d.id;
     document.getElementById("page-container").style.height = "919px";
     document.getElementById("botonMostrarOcultar").value="Ocultar Página";
@@ -1857,18 +1884,39 @@ function mostrarPagina(d){
 }
 
 //reloj
+//var min;
+var minutos= localStorage.getItem("xd");
+function generaMinutos(){
+    if (minutos==0) {
+        minutos=3;
+        return 3;
+    }
+    if (minutos==1) {
+        minutos=6;
+        return 6;
+    }
+    if (minutos==2) {
+        minutos=8;
+        return 8;
+    }
+    if (minutos==3) {
+        minutos=10;
+        return 10;
+    }
+}
+generaMinutos();
 var segundos = 0;
-var minutos = 10;
 var llamada;
 var ceromin='';
 var ceroseg='';
-
-function cuentaAtras(){ 
+function cuentaAtras(){
+    //generaMinutos(); 
     devolvercero(minutos,segundos);
     segundos = segundos % 60;
     document.getElementById("reloj").innerHTML=ceromin+minutos+':'+ceroseg+segundos;
      if (minutos ===0 && segundos ===0){
         alert ("Se agotó su tiempo");
+        window.location.href = "http://localhost/ProyectoTesis/index.php";
         //clearTimeOut(llamada);
     }
     if (segundos ==0){
@@ -1915,4 +1963,54 @@ function scoreDiscretization(d){
     if (d < 30 && d >= 0){
         return "Muy difícil";
     }
+}
+
+function union(){
+    bb();
+    grupoActual=1;
+    $.post("insertaraccion.php",{idSesion:idSesion,accion:'3',idAsociado:null,queryGroup:grupoActual,tipoAccion:'tradicional'});
+}
+function union1(){
+    bb();
+    grupoActual=2;
+    $.post("insertaraccion.php",{idSesion:idSesion,accion:'4',idAsociado:null,queryGroup:grupoActual,tipoAccion:'tradicional'});
+}
+function union2(){
+    bb();
+    grupoActual=3;
+    $.post("insertaraccion.php",{idSesion:idSesion,accion:'5',idAsociado:null,queryGroup:grupoActual,tipoAccion:'tradicional'});
+}
+function union3(){
+    bb();
+    grupoActual=4;
+    $.post("insertaraccion.php",{idSesion:idSesion,accion:'6',idAsociado:null,queryGroup:grupoActual,tipoAccion:'tradicional'});
+}
+function union4(value){
+    bb();
+    console.log(value)
+    if(value==0){
+        $.post("insertaraccion.php",{idSesion:idSesion,accion:'7',idAsociado:null,queryGroup:grupoActual,tipoAccion:'tradicional'});
+    }
+    if(value==1){
+        $.post("insertaraccion.php",{idSesion:idSesion,accion:'8',idAsociado:null,queryGroup:grupoActual,tipoAccion:'tradicional'});
+    }
+    if(value==2){
+        $.post("insertaraccion.php",{idSesion:idSesion,accion:'9',idAsociado:null,queryGroup:grupoActual,tipoAccion:'tradicional'});
+    }
+    if(value==3){
+        $.post("insertaraccion.php",{idSesion:idSesion,accion:'10',idAsociado:null,queryGroup:grupoActual,tipoAccion:'tradicional'});
+    }
+    if(value==4){
+        $.post("insertaraccion.php",{idSesion:idSesion,accion:'11',idAsociado:null,queryGroup:grupoActual,tipoAccion:'tradicional'});
+    }
+    if(value==5){
+        $.post("insertaraccion.php",{idSesion:idSesion,accion:'12',idAsociado:null,queryGroup:grupoActual,tipoAccion:'tradicional'});
+    }
+    if(value==6){
+        $.post("insertaraccion.php",{idSesion:idSesion,accion:'13',idAsociado:null,queryGroup:grupoActual,tipoAccion:'tradicional'});
+    }
+    if(value==7){
+        $.post("insertaraccion.php",{idSesion:idSesion,accion:'14',idAsociado:null,queryGroup:grupoActual,tipoAccion:'tradicional'});
+    }
+    
 }

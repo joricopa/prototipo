@@ -1,17 +1,18 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Visual</title>
+ 
+<html lang="es">
+ 
+<head>
+  <title>Visual</title>
   <meta charset="utf-8" name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <link rel="stylesheet" href="css/visual.css" />
   <script type="text/javascript" src="js/d3.v3.min.js"></script>
   <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
-    <script type="text/javascript" src="http://d3js.org/d3.v2.js"></script>
-    <script type="text/javascript" src="d3/d3.js"></script>
-    <script type="text/javascript" src="js/visual.js"></script>
-  </head>
-  <body onload="cuentaAtras()">
-    <div class="contenedor">
+ 
+</head>
+ 
+<body onload="cuentaAtras()">
+  <div class="contenedor">
     <div id="auxiliar">
         <div id="a1"><a  class="score-title">Fauna y flora</a><br/><a id="a1-fauna" class="score-value">0</a></div>
         <div id="a2"><a  class="score-title">Superficie afectada</a><br/><a id="a2-superficie" class="score-value">0</a></div>
@@ -21,8 +22,8 @@
             <div id="runner1"></div> <div id="runner2"></div>
         </div>
     </div>
-    <div id="contenedor1">
-    <div id="option">
+  	<div id="contenedor1">
+  	<div id="option">
     <input id= "c1" class="boton" name="updateButton" type="button" value="Flora" onclick="union(flora)"/>
     <input id= "c2" class="boton" name="updateButton" type="button" value="Superficie" onclick="union(superficie)"/>
     <input id="c3" class="boton" name="updateButton" type="button" value="Maniobras" onclick="union(maniobras)"/>
@@ -55,7 +56,6 @@
       <iframe id="page-container" src="" sandbox="allow-scripts allow-popups allow-same-origin"></iframe>
     </div>  
   </div>
-    <div id="chart"></div>
-    <script type="text/javascript" src="js/visual.js"></script>
-  </body>
+  <script type="text/javascript" src="js/visual.js"></script>
+</body>
 </html>
