@@ -22,8 +22,11 @@ $hora = date('Y-m-d H:i:s');
 $idAsociado = $_POST['idAsociado']; 
 $queryGroup = $_POST['queryGroup'];
 $tipoAccion = $_POST['tipoAccion'];
+$tarea = $_POST['tarea'];
+$idUsuario = $_POST['idUsuario'];
 
-$res = "INSERT INTO acciones VALUES(NULL,'$id_sesion','$accion','$hora','$idAsociado','$queryGroup','$tipoAccion')";
+
+$res = "INSERT INTO acciones VALUES(NULL,'$accion','$hora','$idAsociado','$queryGroup','$tipoAccion','$tarea','$idUsuario','$id_sesion')";
 echo $res;
 
 if (mysqli_query($link, $res)) {

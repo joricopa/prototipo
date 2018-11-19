@@ -50,7 +50,7 @@
     background: transparent url("http://localhost/ProyectoTesis/img/ranking.png")no-repeat scroll 0% 0%;
     width: 200px;
     height: 20px;
-    left:147px;
+    left:170px;
     top: 148px;
 }
 #leyenda_fecha{
@@ -59,7 +59,7 @@
     background: transparent url("http://localhost/ProyectoTesis/img/fecha.png")no-repeat scroll 0% 0%;
     width: 200px;
     height: 20px;
-    left:360px;
+    left:380px;
     top: 148px;
 }
 #leyenda_legibilidad{
@@ -68,7 +68,7 @@
     background: transparent url("http://localhost/ProyectoTesis/img/legibilidad.png")no-repeat scroll 0% 0%;
     width: 200px;
     height: 20px;
-    left:570px;
+    left:590px;
     top: 147px;
 }
 #leyenda_reputacion{
@@ -77,7 +77,7 @@
     background: transparent url("http://localhost/ProyectoTesis/img/reputacion.png")no-repeat scroll 0% 0%;
     width: 200px;
     height: 20px;
-    left:753px;
+    left:770px;
     top: 148px;
 }
 #fecha{
@@ -341,36 +341,36 @@ float: left;
 input[type=checkbox][name=Check1] + label
 {
     float: left;
-background:transparent url(http://localhost/Prototipo/img/unchecked_1.png ) no-repeat;
+background:transparent url(http://localhost/ProyectoTesis/img/unchecked_1.png ) no-repeat;
 }
 input[type=checkbox][name=Check1]:checked + label
 {
     float: left;
-background:transparent url(http://localhost/Prototipo/img/checked_1.png) no-repeat;
+background:transparent url(http://localhost/ProyectoTesis/img/checked_1.png) no-repeat;
 }
 input[type=checkbox][name=Check2] + label
 {
-background:transparent url(http://localhost/Prototipo/img/unchecked_2.png ) no-repeat;
+background:transparent url(http://localhost/ProyectoTesis/img/unchecked_2.png ) no-repeat;
 }
 input[type=checkbox][name=Check2]:checked + label
 {
-background:transparent url(http://localhost/Prototipo/img/checked_2.png) no-repeat;
+background:transparent url(http://localhost/ProyectoTesis/img/checked_2.png) no-repeat;
 }
 input[type=checkbox][name=Check3] + label
 {
-background:transparent url(http://localhost/Prototipo/img/unchecked_3.png ) no-repeat;
+background:transparent url(http://localhost/ProyectoTesis/img/unchecked_3.png ) no-repeat;
 }
 input[type=checkbox][name=Check3]:checked + label
 {
-background:transparent url(http://localhost/Prototipo/img/checked_3.png) no-repeat;
+background:transparent url(http://localhost/ProyectoTesis/img/checked_3.png) no-repeat;
 }
 input[type=checkbox][name=Check4] + label
 {
-background:transparent url(http://localhost/Prototipo/img/unchecked_4.png ) no-repeat;
+background:transparent url(http://localhost/ProyectoTesis/img/unchecked_4.png ) no-repeat;
 }
 input[type=checkbox][name=Check4]:checked + label
 {
-background:transparent url(http://localhost/Prototipo/img/checked_4.png) no-repeat;
+background:transparent url(http://localhost/ProyectoTesis/img/checked_4.png) no-repeat;
 }
 
 div.tooltip {

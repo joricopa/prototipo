@@ -22,6 +22,24 @@ console.log("ESTE ");
 var idPagina=0;
 var grupoActual=0; 
 var clic = 1;
+var tarea= localStorage.getItem("xd");
+console.log("tarea")
+console.log(tarea)
+var idUsuario= localStorage.getItem("idUsuario");
+console.log("idUsuario")
+console.log(idUsuario)
+if (tarea==0) {
+    tarea=1;
+}
+else if (tarea==1) {
+    tarea=2;
+}
+else if (tarea==2) {
+    tarea=3;
+}
+else if (tarea==3) {
+    tarea=4;
+}
 //guardaPaginator();
 
 function divLogin(){ 
@@ -30,13 +48,13 @@ function divLogin(){
    document.getElementById("botonMostrarOcultar").value="Mostrar Página";
    clic = clic + 1;
    console.log(idSesion)
-   $.post("insertaraccion.php",{idSesion:idSesion,accion:'2',idAsociado:idPagina,queryGroup:grupoActual,tipoAccion:'tradicional'});
+   $.post("insertaraccion.php",{accion:'2',idAsociado:idPagina,queryGroup:grupoActual,tipoAccion:'tradicional',tarea:tarea,idUsuario:idUsuario,idSesion:txt});
    } else{
        document.getElementById("page-container").style.height = "919px";
        document.getElementById("botonMostrarOcultar").value="Ocultar Página";      
     clic = 1;
     console.log(idSesion)
-    $.post("insertaraccion.php",{idSesion:idSesion,accion:'1',idAsociado:idPagina,queryGroup:grupoActual,tipoAccion:'tradicional'});
+    $.post("insertaraccion.php",{accion:'1',idAsociado:idPagina,queryGroup:grupoActual,tipoAccion:'tradicional',tarea:tarea,idUsuario:idUsuario,idSesion:txt});
    }   
 }
  var valorQuery;
@@ -99,7 +117,7 @@ $(document).ready(function () {
             $('#query8').css('display', 'none');
             if ($(this).attr('id') == '1') {
                 $('#query1').css('display', '');
-                $('#1').css('background-color', '#20A4D0');
+                $('#1').css('background-color', '#c8787a');
                 $('#2').css('background-color', '#D9D9D9');
                 $('#3').css('background-color', '#D9D9D9');
                 $('#4').css('background-color', '#D9D9D9');
@@ -113,7 +131,7 @@ $(document).ready(function () {
             }
             if ($(this).attr('id') == '2') {
                 $('#query2').css('display', '');
-                $('#2').css('background-color', '#20A4D0');
+                $('#2').css('background-color', '#C6E746');
                 $('#1').css('background-color', '#D9D9D9');
                 $('#3').css('background-color', '#D9D9D9');
                 $('#4').css('background-color', '#D9D9D9');
@@ -127,7 +145,7 @@ $(document).ready(function () {
             }
             if ($(this).attr('id') == '3') {
                 $('#query3').css('display', '');
-                $('#3').css('background-color', '#20A4D0');
+                $('#3').css('background-color', '#4d90fe');
                 $('#1').css('background-color', '#D9D9D9');
                 $('#2').css('background-color', '#D9D9D9');
                 $('#4').css('background-color', '#D9D9D9');
@@ -141,7 +159,7 @@ $(document).ready(function () {
             }
             if ($(this).attr('id') == '4') {
                 $('#query4').css('display', '');
-                $('#4').css('background-color', '#20A4D0');
+                $('#4').css('background-color', '#10a54a');
                 $('#1').css('background-color', '#D9D9D9');
                 $('#2').css('background-color', '#D9D9D9');
                 $('#3').css('background-color', '#D9D9D9');
@@ -213,7 +231,8 @@ $(document).ready(function () {
 var arrayGroup1 = [],
     arrayGroup2 = [],
     arrayGroup3 = [],
-    arrayGroup4 = [],    
+    arrayGroup4 = [],
+    visitados = [],    
 	step=1,
     selection_log = [],
     c1Fauna = 0,
@@ -258,8 +277,9 @@ function bb()
 
 }
 
+
 function onChange(newPageValue) {
-    $.post("insertaraccion.php",{idSesion:idSesion,accion:'20',idAsociado:newPageValue,queryGroup:grupoActual,tipoAccion:'tradicional'});
+    $.post("insertaraccion.php",{accion:'20',idAsociado:newPageValue,queryGroup:grupoActual,tipoAccion:'tradicional',tarea:tarea,idUsuario:idUsuario,idSesion:txt});
     //alert(newPageValue);
     console.log("onchange function")
 }
@@ -301,7 +321,7 @@ function change_state(obj) {
             }
             child = text.children[parentId-1].children[localId];
             miniJson1.children.push(child);
-            $.post("insertaraccion.php",{idSesion:idSesion,accion:'15',idAsociado:obj.title,queryGroup:grupoActual,tipoAccion:'tradicional'});
+            $.post("insertaraccion.php",{accion:'15',idAsociado:obj.title,queryGroup:grupoActual,tipoAccion:'tradicional',tarea:tarea,idUsuario:idUsuario,idSesion:txt});
             c1Fauna++; 
             document.getElementById("c1-fauna").innerHTML = c1Fauna ;
  
@@ -322,7 +342,7 @@ function change_state(obj) {
             child = text.children[parentId-1].children[localId];
             miniJson2.children.push(child);
             c2Superficie++; 
-            $.post("insertaraccion.php",{idSesion:idSesion,accion:'16',idAsociado:obj.title,queryGroup:grupoActual,tipoAccion:'tradicional'});
+            $.post("insertaraccion.php",{accion:'16',idAsociado:obj.title,queryGroup:grupoActual,tipoAccion:'tradicional',tarea:tarea,idUsuario:idUsuario,idSesion:txt});
             document.getElementById("c2-superficie").innerHTML = c2Superficie;
 
             generateMiniResults(5, order, miniJson2);
@@ -341,7 +361,7 @@ function change_state(obj) {
             }
             child = text.children[parentId-1].children[localId];
             miniJson3.children.push(child);
-            $.post("insertaraccion.php",{idSesion:idSesion,accion:'17',idAsociado:obj.title,queryGroup:grupoActual,tipoAccion:'tradicional'});
+            $.post("insertaraccion.php",{accion:'17',idAsociado:obj.title,queryGroup:grupoActual,tipoAccion:'tradicional',tarea:tarea,idUsuario:idUsuario,idSesion:txt});
             c3Maniobras++;
             document.getElementById("c3-maniobras").innerHTML = c3Maniobras;
             generateMiniResults(6, order, miniJson3);
@@ -361,7 +381,7 @@ function change_state(obj) {
             child = text.children[parentId-1].children[localId];
             miniJson4.children.push(child);
             c4Responsabilidades++;
-            $.post("insertaraccion.php",{idSesion:idSesion,accion:'18',idAsociado:obj.title,queryGroup:grupoActual,tipoAccion:'tradicional'});
+            $.post("insertaraccion.php",{accion:'18',idAsociado:obj.title,queryGroup:grupoActual,tipoAccion:'tradicional',tarea:tarea,idUsuario:idUsuario,idSesion:txt});
             document.getElementById("c4-responsabilidades").innerHTML = c4Responsabilidades;
 
             generateMiniResults(7, order, miniJson4);
@@ -390,7 +410,7 @@ function change_state(obj) {
             
             deleteObject(miniJson1,obj.title);
             order = $("#sort").val();
-            $.post("insertaraccion.php",{idSesion:idSesion,accion:'21',idAsociado:obj.title,queryGroup:grupoActual,tipoAccion:'tradicional'});
+            $.post("insertaraccion.php",{accion:'21',idAsociado:obj.title,queryGroup:grupoActual,tipoAccion:'tradicional',tarea:tarea,idUsuario:idUsuario,idSesion:txt});
             c1Fauna--; 
             document.getElementById("c1-fauna").innerHTML = c1Fauna;
             generateMiniResults(4, order, miniJson1);
@@ -405,7 +425,7 @@ function change_state(obj) {
             deleteObject(miniJson2,obj.title);
             order = $("#sort").val();
             c2Superficie--;
-            $.post("insertaraccion.php",{idSesion:idSesion,accion:'22',idAsociado:obj.title,queryGroup:grupoActual,tipoAccion:'tradicional'}); 
+            $.post("insertaraccion.php",{accion:'22',idAsociado:obj.title,queryGroup:grupoActual,tipoAccion:'tradicional',tarea:tarea,idUsuario:idUsuario,idSesion:txt}); 
             document.getElementById("c2-superficie").innerHTML = c2Superficie;
             generateMiniResults(5, order, miniJson2);
             console.log(arrayGroup2);
@@ -417,7 +437,7 @@ function change_state(obj) {
             
             deleteObject(miniJson3,obj.title);
             order = $("#sort").val();
-            $.post("insertaraccion.php",{idSesion:idSesion,accion:'23',idAsociado:obj.title,queryGroup:grupoActual,tipoAccion:'tradicional'});
+            $.post("insertaraccion.php",{accion:'23',idAsociado:obj.title,queryGroup:grupoActual,tipoAccion:'tradicional',tarea:tarea,idUsuario:idUsuario,idSesion:txt});
             c3Maniobras--;
             document.getElementById("c3-maniobras").innerHTML = c3Maniobras;
             generateMiniResults(6, order, miniJson3);
@@ -434,7 +454,7 @@ function change_state(obj) {
             deleteObject(miniJson4,obj.title);
             order = $("#sort").val();
             c4Responsabilidades--;
-            $.post("insertaraccion.php",{idSesion:idSesion,accion:'hola2',idAsociado:obj.title,queryGroup:grupoActual,tipoAccion:'tradicional'});
+            $.post("insertaraccion.php",{accion:'24',idAsociado:obj.title,queryGroup:grupoActual,tipoAccion:'tradicional',tarea:tarea,idUsuario:idUsuario,idSesion:txt});
             document.getElementById("c4-responsabilidades").innerHTML = c4Responsabilidades;
             generateMiniResults(7, order, miniJson4);
             console.log(arrayGroup4);
@@ -1827,12 +1847,16 @@ function generateResults(query, order, text) {
         ObjATitle.attr("legibilidad",text.children[query].children[i].rscore);
         ObjATitle.attr("reputacion",text.children[query].children[i].repu_normalizada);
 
+		ObjATitle.attr("onmouseover","sobrePagina(this)");
         ObjATitle.attr("onClick","mostrarPagina(this)");
         ObjATitle.attr("numquery",query);
-
-        //var pag=text.children[query].children[i].url_local;
-
-        ObjATitle.text(text.children[query].children[i].name);  
+        if(visitados.indexOf(text.children[query].children[i].id)==-1){
+            ObjATitle.text(text.children[query].children[i].name); 
+        }
+        else{
+            ObjATitle.text(text.children[query].children[i].name).css('color', 'red'); 
+        }
+         
         ObjDivVisibleUrl.text(text.children[query].children[i].url);
         ObjDivSnippet.text(text.children[query].children[i].date + " - " + text.children[query].children[i].snippet);
         ObjDivScores.text("Ranking: " + rankingFix(text, i, query) + " - Legibilidad: " + scoreDiscretization(text.children[query].children[i].rscore) + " - Reputación: " + text.children[query].children[i].repu_normalizada);
@@ -1848,15 +1872,22 @@ function generateResults(query, order, text) {
 		var sdiv2 = "<input id=\"c2\" title=\""+text.children[query].children[i].id+"\" onchange=\"change_state(this)\" type=\"checkbox\" value=\""+query+"\" name=\"test\"/>";
 		var sdiv3 = "<input id=\"c3\" title=\""+text.children[query].children[i].id+"\" onchange=\"change_state(this)\" type=\"checkbox\" value=\""+query+"\" name=\"test\"/>";
 		var sdiv4 = "<input id=\"c4\" title=\""+text.children[query].children[i].id+"\" onchange=\"change_state(this)\" type=\"checkbox\" value=\""+query+"\" name=\"test\"/>";
-        ObjLabelCat1.append(sdiv1);
-        ObjLabelCat2.append(sdiv2);
-        ObjLabelCat3.append(sdiv3);
-        ObjLabelCat4.append(sdiv4);
-
-        ObjDivTitle.append(ObjLabelCat1);
-        ObjDivTitle.append(ObjLabelCat2);
-        ObjDivTitle.append(ObjLabelCat3);
-        ObjDivTitle.append(ObjLabelCat4);
+        if(text.children[query].children[i].id<2000){
+            ObjLabelCat1.append(sdiv1);
+            ObjDivTitle.append(ObjLabelCat1);
+        }
+        if((text.children[query].children[i].id>2000)&&(text.children[query].children[i].id<3000)){
+            ObjLabelCat2.append(sdiv2);
+            ObjDivTitle.append(ObjLabelCat2);
+        }
+        if((text.children[query].children[i].id>3000)&&(text.children[query].children[i].id<4000)){
+            ObjLabelCat3.append(sdiv3);
+            ObjDivTitle.append(ObjLabelCat3);
+        }
+        if(text.children[query].children[i].id>4000){
+            ObjLabelCat4.append(sdiv4);
+            ObjDivTitle.append(ObjLabelCat4);
+        }    
         ObjDivTitle.append(ObjATitle);
     }
 
@@ -1865,15 +1896,36 @@ function generateResults(query, order, text) {
     $(container).append(ObjDivGscControl);
 }
 
+function sobrePagina(d){
+    
+	console.log("sobre snippet");
+    idPagina=$(d).attr("page");
+    grupoActual=$(d).attr("groupPage");
+    
+	$.post("insertaraccion.php",{accion:'25',idAsociado:$(d).attr("page"),queryGroup:$(d).attr("groupPage"),tipoAccion:'tradicional',tarea:tarea,idUsuario:idUsuario,idSesion:txt});
+
+}
+
 function mostrarPagina(d){
     console.log("click");
     console.log("Mostrando pagina")
     console.log(d.page)
     console.log(d.id)
     console.log($(d).attr("ranking"))
+    if(visitados.indexOf($(d).attr("page"))==-1){
+        visitados.push($(d).attr("page"));
+    }
+
+    
+    console.log("visitados")
+    console.log(visitados) 
     idPagina=$(d).attr("page");
     grupoActual=$(d).attr("groupPage");
-    $.post("insertaraccion.php",{idSesion:idSesion,accion:'19',idAsociado:$(d).attr("page"),queryGroup:$(d).attr("groupPage"),tipoAccion:'tradicional'});
+    //$.('#idPagina').css('color', 'red');
+    /* seleccionar los elementos con id="inicio" con clase="principal" y que son etiqueta "p" */
+    //$("#d.id").css('color', 'red');
+    $.post("insertaraccion.php",{accion:'19',idAsociado:$(d).attr("page"),queryGroup:$(d).attr("groupPage"),tipoAccion:'tradicional',tarea:tarea,idUsuario:idUsuario,idSesion:txt});
+    document.getElementById(d.id).style.color = "red";
     document.getElementById('page-container').src = d.id;
     document.getElementById("page-container").style.height = "919px";
     document.getElementById("botonMostrarOcultar").value="Ocultar Página";
@@ -1915,7 +1967,7 @@ function cuentaAtras(){
     segundos = segundos % 60;
     document.getElementById("reloj").innerHTML=ceromin+minutos+':'+ceroseg+segundos;
      if (minutos ===0 && segundos ===0){
-        alert ("Se agotó su tiempo");
+        alert ("Muchas Gracias por tu colaboración. Sigamos con lo siguiente.");
         window.location.href = "http://localhost/ProyectoTesis/index.php";
         //clearTimeOut(llamada);
     }
@@ -1968,49 +2020,49 @@ function scoreDiscretization(d){
 function union(){
     bb();
     grupoActual=1;
-    $.post("insertaraccion.php",{idSesion:idSesion,accion:'3',idAsociado:null,queryGroup:grupoActual,tipoAccion:'tradicional'});
+    $.post("insertaraccion.php",{accion:'3',idAsociado:null,queryGroup:grupoActual,tipoAccion:'tradicional',tarea:tarea,idUsuario:idUsuario,idSesion:txt});
 }
 function union1(){
     bb();
     grupoActual=2;
-    $.post("insertaraccion.php",{idSesion:idSesion,accion:'4',idAsociado:null,queryGroup:grupoActual,tipoAccion:'tradicional'});
+    $.post("insertaraccion.php",{accion:'4',idAsociado:null,queryGroup:grupoActual,tipoAccion:'tradicional',tarea:tarea,idUsuario:idUsuario,idSesion:txt});
 }
 function union2(){
     bb();
     grupoActual=3;
-    $.post("insertaraccion.php",{idSesion:idSesion,accion:'5',idAsociado:null,queryGroup:grupoActual,tipoAccion:'tradicional'});
+    $.post("insertaraccion.php",{accion:'5',idAsociado:null,queryGroup:grupoActual,tipoAccion:'tradicional',tarea:tarea,idUsuario:idUsuario,idSesion:txt});
 }
 function union3(){
     bb();
     grupoActual=4;
-    $.post("insertaraccion.php",{idSesion:idSesion,accion:'6',idAsociado:null,queryGroup:grupoActual,tipoAccion:'tradicional'});
+    $.post("insertaraccion.php",{accion:'6',idAsociado:null,queryGroup:grupoActual,tipoAccion:'tradicional',tarea:tarea,idUsuario:idUsuario,idSesion:txt});
 }
 function union4(value){
     bb();
     console.log(value)
     if(value==0){
-        $.post("insertaraccion.php",{idSesion:idSesion,accion:'7',idAsociado:null,queryGroup:grupoActual,tipoAccion:'tradicional'});
+        $.post("insertaraccion.php",{accion:'7',idAsociado:null,queryGroup:grupoActual,tipoAccion:'tradicional',tarea:tarea,idUsuario:idUsuario,idSesion:txt});
     }
     if(value==1){
-        $.post("insertaraccion.php",{idSesion:idSesion,accion:'8',idAsociado:null,queryGroup:grupoActual,tipoAccion:'tradicional'});
+        $.post("insertaraccion.php",{accion:'8',idAsociado:null,queryGroup:grupoActual,tipoAccion:'tradicional',tarea:tarea,idUsuario:idUsuario,idSesion:txt});
     }
     if(value==2){
-        $.post("insertaraccion.php",{idSesion:idSesion,accion:'9',idAsociado:null,queryGroup:grupoActual,tipoAccion:'tradicional'});
+        $.post("insertaraccion.php",{accion:'9',idAsociado:null,queryGroup:grupoActual,tipoAccion:'tradicional',tarea:tarea,idUsuario:idUsuario,idSesion:txt});
     }
     if(value==3){
-        $.post("insertaraccion.php",{idSesion:idSesion,accion:'10',idAsociado:null,queryGroup:grupoActual,tipoAccion:'tradicional'});
+        $.post("insertaraccion.php",{accion:'10',idAsociado:null,queryGroup:grupoActual,tipoAccion:'tradicional',tarea:tarea,idUsuario:idUsuario,idSesion:txt});
     }
     if(value==4){
-        $.post("insertaraccion.php",{idSesion:idSesion,accion:'11',idAsociado:null,queryGroup:grupoActual,tipoAccion:'tradicional'});
+        $.post("insertaraccion.php",{accion:'11',idAsociado:null,queryGroup:grupoActual,tipoAccion:'tradicional',tarea:tarea,idUsuario:idUsuario,idSesion:txt});
     }
     if(value==5){
-        $.post("insertaraccion.php",{idSesion:idSesion,accion:'12',idAsociado:null,queryGroup:grupoActual,tipoAccion:'tradicional'});
+        $.post("insertaraccion.php",{accion:'12',idAsociado:null,queryGroup:grupoActual,tipoAccion:'tradicional',tarea:tarea,idUsuario:idUsuario,idSesion:txt});
     }
     if(value==6){
-        $.post("insertaraccion.php",{idSesion:idSesion,accion:'13',idAsociado:null,queryGroup:grupoActual,tipoAccion:'tradicional'});
+        $.post("insertaraccion.php",{accion:'13',idAsociado:null,queryGroup:grupoActual,tipoAccion:'tradicional',tarea:tarea,idUsuario:idUsuario,idSesion:txt});
     }
     if(value==7){
-        $.post("insertaraccion.php",{idSesion:idSesion,accion:'14',idAsociado:null,queryGroup:grupoActual,tipoAccion:'tradicional'});
+        $.post("insertaraccion.php",{accion:'14',idAsociado:null,queryGroup:grupoActual,tipoAccion:'tradicional',tarea:tarea,idUsuario:idUsuario,idSesion:txt});
     }
     
 }
